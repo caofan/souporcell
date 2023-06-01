@@ -425,7 +425,7 @@ fn load_clusters(clusters: &String) -> (Vec<(usize, usize)>, Vec<(String, Vec<f6
         let cell = tokens[0];
         let mut losses: Vec<f64> = Vec::new();
         let cluster1 = tokens[1].to_string().parse::<usize>().unwrap();
-        num_clusters = max(num_clusters, cluster1);
+        // num_clusters = max(num_clusters, cluster1);
         let mut best: f64 = -10000000000.0;
         let mut second_best: f64 = -10000000000.0;
         let mut second_best_index: usize = 0;
@@ -443,11 +443,12 @@ fn load_clusters(clusters: &String) -> (Vec<(usize, usize)>, Vec<(String, Vec<f6
                 second_best_index = i-2;
             }
         }
+        num_clusters = max(num_clusters, losses.len());
         clusters.push((cell.to_string(), losses));
         //println!("cell {} index {} clusters {} {}",cell, cell_clusters.len(),best_index, second_best_index);
         cell_clusters.push((best_index, second_best_index));
     }
-    (cell_clusters, clusters, num_clusters+1)
+    (cell_clusters, clusters, num_clusters)
 }
 
 
