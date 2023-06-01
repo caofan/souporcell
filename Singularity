@@ -1,9 +1,9 @@
 Bootstrap: docker
 
-From: conda/miniconda3
+From: continuumio/miniconda3
 
 %environment
-	PATH=/opt/bedtools2/bin:/usr/local/envs/py36/bin:/opt/souporcell:/opt/souporcell/troublet/target/release:/usr/local/condabin:/opt/minimap2-2.7:/root/.cargo/bin:/opt/vartrix-v1.1.3-x86_64-linux/:/opt:$PATH
+	PATH=/opt/bedtools2/bin:/opt/conda/envs/py36/bin:/opt/souporcell:/opt/souporcell/troublet/target/release:/opt/minimap2-2.7:/root/.cargo/bin:/opt/conda/bin:/opt:$PATH
 
 %post -c /bin/bash
         apt update
@@ -11,7 +11,7 @@ From: conda/miniconda3
         yes | apt-get install build-essential
 	yes | apt-get install curl
 	echo blah
-	yes | /usr/local/bin/conda create -n py36 python=3.6
+	yes | /opt/conda/bin/conda create -n py36 python=3.6
 	. /opt/conda/bin/activate py36
         yes | apt-get install libncurses5-dev
         yes | apt-get install zlib1g-dev
@@ -34,18 +34,18 @@ From: conda/miniconda3
 	rustup default stable
 	yes | apt-get install git
 	cd /opt
-	git clone https://github.com/wheaton5/souporcell.git
+	git clone https://github.com/caofan/souporcell.git
 	cd souporcell/troublet
 	cargo build --release
 	cd /opt/souporcell/souporcell
 	cargo build --release
 	cd /opt
-	yes | /usr/local/envs/py36/bin/pip install pysam
-	/usr/local/envs/py36/bin/pip install pyvcf
-        /usr/local/envs/py36/bin/pip install numpy
-        /usr/local/envs/py36/bin/pip install scipy
-        /usr/local/envs/py36/bin/pip install pystan==2.17.1.0
-        /usr/local/envs/py36/bin/pip install pyfaidx
+	yes | /opt/conda/envs/py36/bin/pip install pysam
+	/opt/conda/envs/py36/bin/pip install pyvcf3
+        /opt/conda/envs/py36/bin/pip install numpy
+        /opt/conda/envs/py36/bin/pip install scipy
+        /opt/conda/envs/py36/bin/pip install pystan==2.17.1.0
+        /opt/conda/envs/py36/bin/pip install pyfaidx
         cd /opt
 	wget https://github.com/samtools/htslib/releases/download/1.9/htslib-1.9.tar.bz2
 	tar xvfj htslib-1.9.tar.bz2
@@ -73,6 +73,6 @@ From: conda/miniconda3
 	wget https://github.com/ekg/freebayes/releases/download/v1.3.1/freebayes-v1.3.1
 	mv freebayes-v1.3.1 freebayes
 	chmod 777 freebayes
-        wget https://github.com/10XGenomics/vartrix/releases/download/v1.1.16/vartrix_linux
+        wget https://github.com/10XGenomics/vartrix/releases/download/v1.1.22/vartrix_linux
         mv vartrix_linux vartrix
         chmod 777 vartrix

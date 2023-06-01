@@ -1,0 +1,1 @@
+SINGULARITY_TMPDIR=/home/ec2-user/tmp/ TMPDIR=/home/ec2-user/tmp/ SINGULARITY_LOCALCACHEDIR=/home/ec2-user/tmp SINGULARITY_CACHEDIR=/home/ec2-user/tmp sudo -E singularity build souporcell.sif Singularity
